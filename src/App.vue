@@ -25,7 +25,7 @@
                   <span>100 บาท </span>
                 </v-col>
                 <v-col>
-                  <v-btn color="orange" class="ml-3">
+                  <v-btn color="orange" class="ml-3" @click="send">
                     ซื้อ
                   </v-btn>
                 </v-col>
@@ -40,6 +40,25 @@
 
 <script>
 export default {
+  methods: {
+    send: function() {
+      this.$liff
+        .sendMessages("สั่ง นมสด 100 บาท")
+        .then(() => {
+          this.$liff.closeWindow();
+        })
+        .catch((err) => {
+          console.error(err.code, err.message);
+        });
+    },
+  },
+  beforeCreate() {
+    this.$liff.init(
+      { liffId: "1656018498-mlPeZyAE" },
+      () => {},
+      (err) => console.error(err.code, err.message),
+    );
+  },
   data: () => ({
     cards: [
       {
