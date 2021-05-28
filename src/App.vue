@@ -43,7 +43,7 @@ export default {
   methods: {
     send: function() {
       this.$liff
-        .sendMessages("สั่ง นมสด 100 บาท")
+        .sendMessages([{ type: "text", text: "สั่ง นมสด 100 บาท" }])
         .then(() => {
           this.$liff.closeWindow();
         })
